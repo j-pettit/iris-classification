@@ -27,8 +27,25 @@ dataset = read_csv(url, names=names)
 # print(dataset.describe())
 # print(dataset.groupby('class').size())
 
-# box and whisker plots
+# plot data
 # dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 # dataset.hist()
 # scatter_matrix(dataset)
 # pyplot.show()
+
+# split out validation dataset
+arr = dataset.values
+X = arr[:,0:4]
+y = arr[:,4]
+X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=0.2, random_state=1)
+
+# spot check and evaluate algorithms
+models = [
+    ('LR', LogisticRegression(solver='liblinear', multi_class='ovr')),
+    ('LDA', LinearDiscriminantAnalysis()),
+    ('KNN', KNeighborsClassifier()),
+    ('CART', DecisionTreeClassifier()),
+    ('NB', GaussianNB()),
+    ('SVM', SVC(gamma='auto')),
+]
+results = []
