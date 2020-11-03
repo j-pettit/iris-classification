@@ -40,12 +40,33 @@ y = arr[:,4]
 X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=0.2, random_state=1)
 
 # spot check and evaluate algorithms
-models = [
-    ('LR', LogisticRegression(solver='liblinear', multi_class='ovr')),
-    ('LDA', LinearDiscriminantAnalysis()),
-    ('KNN', KNeighborsClassifier()),
-    ('CART', DecisionTreeClassifier()),
-    ('NB', GaussianNB()),
-    ('SVM', SVC(gamma='auto')),
-]
-results = []
+# models = [
+#     ('LR', LogisticRegression(solver='liblinear', multi_class='ovr')),
+#     ('LDA', LinearDiscriminantAnalysis()),
+#     ('KNN', KNeighborsClassifier()),
+#     ('CART', DecisionTreeClassifier()),
+#     ('NB', GaussianNB()),
+#     ('SVM', SVC(gamma='auto')),
+# ]
+# results = []
+# names = []
+# for name, model in models:
+#     kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
+#     cv_results = cross_val_score(model, X_train, y_train, cv=kfold, scoring='accuracy')
+#     results.append(cv_results)
+#     names.append(name)
+#     print(f'{name}: {cv_results.mean()} ({cv_results.std()})')
+
+# pyplot.boxplot(results, labels=names)
+# pyplot.title('Algorithms Comparison')
+# pyplot.show()
+
+# make predictions on validation dataset
+model = SVC(gamma='auto')
+model.fit(X_train, y_train)
+predictions = model.predict(X_validation)
+
+# Evaluate predictions
+print(accuracy_score(y_validation, predictions))
+print(confusion_matrix(y_validation, predictions))
+print(classification_report(y_validation, predictions))
