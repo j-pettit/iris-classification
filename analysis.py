@@ -30,12 +30,20 @@ print(dataset.describe())
 print(dataset.groupby('class').size())
 
 # plot data
+pyplot.figure(0)
 dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 pyplot.savefig('./fig/data_box_whisker.png')
+pyplot.clf()
+
+pyplot.figure(1)
 dataset.hist()
 pyplot.savefig('./fig/data_histogram.png')
+pyplot.clf()
+
+pyplot.figure(2)
 scatter_matrix(dataset)
 pyplot.savefig('./fig/data_scatter_matrix.png')
+pyplot.clf()
 
 # split out validation dataset
 arr = dataset.values
@@ -62,6 +70,8 @@ for name, model in models:
     print(f'{name}: {cv_results.mean()} ({cv_results.std()})')
 
 # Plot algorithms
+pyplot.figure(3)
 pyplot.boxplot(results, labels=names)
 pyplot.title('Algorithms Comparison')
 pyplot.savefig('./fig/algorithms_comparison.png')
+pyplot.clf()
