@@ -13,4 +13,4 @@ Machine learning classification of iris flowers. Follows Machine Learning Master
 ### Usage
 
 - Run `analysis.py` to generate dataset analysis, algorithm comparison, and plots.
-- Run `classifier.py` to generate predictions and evaluate performance using SVC.
+- Run `classifier.py` to generate predictions and evaluate performance using SVC and LDA.
